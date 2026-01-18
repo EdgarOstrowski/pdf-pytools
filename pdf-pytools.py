@@ -29,6 +29,23 @@ def split_pdf_files(pdf_file, output_file):
         with open(f'part2_{output_file}', 'wb') as outfile2:
             writer2.write(outfile2)
 
+
+def remove_password(pdf_file, output_file, password):
+
+    reader = PyPDF2.PdfReader(pdf_file)
+
+    if reader.is_encrypted:
+        reader.decrypt(password)
+
+    writer = PyPDF2.PdfWriter()
+
+    for page in reader.pages:
+        writer.add_page(page)
+
+    with open(output_file, "wb") as f:
+        writer.write(f)
+
+
 def build_parser():
     parser = argparse.ArgumentParser(description='Process some PDF files.')
     parser.add_argument("pdf_files", nargs='*', help='Input PDF files')
@@ -37,7 +54,7 @@ def build_parser():
                         help='List of PDF files to merge with the input file')
     parser.add_argument('-o', '--output', help='Output PDF file name', required=True)
     parser.add_argument('-s', '--split', help='Split at given page number', type=int)
-
+    parser.add_argument('-d', '--decrypt', help='Remove password from a PDF file', type=str)
     return parser
 
 
@@ -47,6 +64,5 @@ if __name__ == '__main__':
 
     if args.merge:
         merge_pdf_files(args.pdf_files, args.output)
-
-
-
+    elif args.decrypt:
+        remove_password(args.pdf_files[0], args.output, args.decrypt)
