@@ -14,7 +14,7 @@ pip install -e .
 Combine multiple PDF files into one:
 
 ```bash
-pdf-pytools -m -o output.pdf file1.pdf file2.pdf file3.pdf
+pdf-pytools file1.pdf file2.pdf file3.pdf -m -o output.pdf
 ```
 
 ### Split a PDF
@@ -22,7 +22,7 @@ pdf-pytools -m -o output.pdf file1.pdf file2.pdf file3.pdf
 Split a PDF at a given page number. The two halves are saved as `part1_<output>` and `part2_<output>`:
 
 ```bash
-pdf-pytools -s 5 -o output.pdf input.pdf
+pdf-pytools input.pdf -s 5 -o output.pdf 
 ```
 
 ### Remove Password
@@ -30,7 +30,7 @@ pdf-pytools -s 5 -o output.pdf input.pdf
 Decrypt a password-protected PDF:
 
 ```bash
-pdf-pytools -d mypassword -o unlocked.pdf locked.pdf
+pdf-pytools locked.pdf -d mypassword -o unlocked.pdf 
 ```
 
 ## Options
