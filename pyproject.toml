@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-pytools"
+version = "0.1.0"
+description = "CLI tools for merging, splitting, and decrypting PDF files"
+requires-python = ">=3.8"
+dependencies = [
+    "PyPDF2",
+    "pycryptodome>=3.15.0",
+]
+
+[project.scripts]
+pdf-pytools = "pdf_pytools:main"
